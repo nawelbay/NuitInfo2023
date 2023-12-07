@@ -3,7 +3,7 @@ name: Build Docker Image
 on:
   push:
     branches:
-      - master 
+      - master
 
 jobs:
   build:
@@ -17,7 +17,13 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       - name: Build Docker Image
-        run: docker buildx build --platform linux/amd64,linux/arm64 -t ${{ github.repository_owner }}/infon:latest -f Dockerfile .
+        run: docker buildx build --platform linux/amd64,linux/arm64 -t ${{ github.repository_owner }}/infon:latest -f Dockerfile . --progress plain
+
+      - name: List Docker Images
+        run: docker images
+
+      - name: Pull Docker Image
+        run: docker pull ${{ github.repository_owner }}/infon:latest || true
 
       - name: Push Docker Image to Container Registry
         run: |
