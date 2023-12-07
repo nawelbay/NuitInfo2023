@@ -21,6 +21,6 @@ jobs:
 
     - name: Push Docker Image to Container Registry
       run: |
-        echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME  }} --password-stdin
+        echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME  }} --password-stdin
         docker push ${{ github.repository_owner }}/infon:latest
 
